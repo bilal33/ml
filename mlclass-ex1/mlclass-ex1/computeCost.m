@@ -5,7 +5,7 @@ function J = computeCost(X, y, theta)
 
 % Initialize some useful values
 m = length(y); % number of training examples
-dbstop('computeCost',1)
+%dbstop('computeCost',1)
 % You need to return the following variables correctly 
 J = 0;
 
