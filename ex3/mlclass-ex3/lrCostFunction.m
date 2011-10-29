@@ -11,7 +11,7 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
-
+%dbstop('lrCostFunction',55);
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
@@ -37,14 +37,22 @@ grad = zeros(size(theta));
 %
 
 
+h_x = sigmoid(X*theta);
+temp1 = -1.*y.*log(h_x) - (1-y).*log(1 - h_x);
+J = (1./m)*sum(temp1) +  (lambda/(2*m))*( sum(theta.^2) - theta(1)^2);
 
+temp2 = h_x - y;
 
+%grad(1) = sum(temp2.*X(:,1))./m;
+%for i=2:size(theta,1)
+%	grad(i) = ( sum(temp2.*X(:,i)) + lambda*theta(i) )./m;
+%end
 
-
-
-
-
-
+grad = (1./m)*(X'*temp2);
+%vectorized the regularization term. we dont need the theta(1) term vectorized.
+temp_theta = theta;
+temp_theta(1) = 0;
+grad = grad + lambda*temp_theta/m;
 % =============================================================
 
 end
