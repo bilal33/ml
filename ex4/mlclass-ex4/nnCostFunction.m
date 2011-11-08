@@ -29,7 +29,7 @@ m = size(X, 1);
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
-
+%dbstop('nnCostFunction',1);
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
@@ -61,10 +61,15 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+y_temp = zeros(num_labels,m);
+idx=sub2ind(size(y_temp),y',[1:m]);
+y_temp(idx)=1;
+X = [ones(m,1) X];
+a2 = sigmoid(Theta1*X');
+a2 = [ones(m,1) a2'];
+h_theta = sigmoid(Theta2*a2');
 
-
-
-
+J = (1/m)*sum(sum(-1*y_temp.*log(h_theta) - (1-y_temp).*log(1-h_theta)));
 
 
 
