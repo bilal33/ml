@@ -29,7 +29,7 @@ m = size(X, 1);
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
-%dbstop('nnCostFunction',1);
+dbstop('nnCostFunction',1);
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
@@ -70,17 +70,8 @@ a2 = [ones(m,1) a2'];
 h_theta = sigmoid(Theta2*a2');
 
 J = (1/m)*sum(sum(-1*y_temp.*log(h_theta) - (1-y_temp).*log(1-h_theta)));
-
-
-
-
-
-
-
-
-
-
-
+reg = (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)) );
+J = J + reg;
 
 
 
