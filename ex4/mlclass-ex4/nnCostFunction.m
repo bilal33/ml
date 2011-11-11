@@ -79,6 +79,13 @@ d2=d2(:,2:end);
 Theta1_grad = (Theta1_grad + d2'*X)./m;
 Theta2_grad = (Theta2_grad + d3*a2)./m;
 
+t1 = (lambda/m).*Theta1;
+t1(:, 1)=0;
+Theta1_grad = Theta1_grad + t1;
+
+t2 = (lambda/m).*Theta2;
+t2(:, 1)=0;
+Theta2_grad = Theta2_grad + t2;
 % -------------------------------------------------------------
 
 % =========================================================================
